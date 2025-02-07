@@ -8,6 +8,10 @@
     "dist"
   ],
   "exports": {
+    "./subscription": "./src/subscription.tsx",
+    "./carousel": "./src/carousel.tsx",
+    "./nav": "./src/nav.tsx",
+    "./button": "./src/button.tsx",
     "./styles.css": "./dist/index.css",
     "./card": "./src/card.tsx"
   },
