@@ -8,6 +8,8 @@
     "dist"
   ],
   "exports": {
+    "./hero": "./src/hero.tsx",
+    "./footer": "./src/footer.tsx",
     "./subscription": "./src/subscription.tsx",
     "./carousel": "./src/carousel.tsx",
     "./nav": "./src/nav.tsx",

@@ -2,7 +2,7 @@ import Button from "./button"
 
 const subscription = () => {
     return (
-        <div className="ui-flex ui-flex-col ui-items-center ui-justify-center ui-pt-52 ui-pb-52">
+        <div className="ui-max-w-7xl ui-mx-auto ui-flex ui-flex-col ui-items-center ui-justify-center ui-pt-52 ui-pb-28">
             <div className="ui-text-white ui-text-5xl ui-text-center ui-font-semibold">
             <p>
             Receive Notifications for
