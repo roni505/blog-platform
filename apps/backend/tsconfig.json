@@ -1,0 +1,32 @@
+{
+  "extends": "@repo/typescript-config/base.json",
+  "compilerOptions": {
+    "moduleResolution": "bundler", // Ensure it's one of "node16", "nodenext", or "bundler"
+    "module": "ESNext",
+    "target": "ESNext",
+    "baseUrl": ".", // Ensures paths are correctly resolved
+    "paths": {
+      "@repo/zod-schemas/*": ["../../packages/zod-schemas/src/*"]
+    },
+    // "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    "next.config.js",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
