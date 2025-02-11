@@ -13,7 +13,7 @@ model User {
   id        String  @id @default(uuid())
   email     String @unique
   name      String?
-  password  Int
+  password  String
   post      Post[]
 }
 

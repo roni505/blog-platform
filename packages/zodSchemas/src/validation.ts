@@ -2,9 +2,9 @@ import { z } from "zod";
 
 // zod Schema
 export const signUpValidation = z.object({
-    name: z.string(),
-    email: z.string().email(),
-    password: z.number().min(6)
+    name: z.string().min(1, { message: "Name is required"}),
+    email: z.string().email({message: "Invalid emaill address"}),
+    password: z.string().min(6, { message: "Password must be of least 6 characters long"})
 })
 
 export const loginValidation = z.object({

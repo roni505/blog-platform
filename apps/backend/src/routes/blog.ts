@@ -38,7 +38,7 @@ blogRounter.use('/*', async(c, next) => {
     console.log("Extracted UserID:", res.id);
       await next();
     } catch (error) {
-      c.json({
+      return c.json({
         message: "Invalid or token expired"
       })
     }

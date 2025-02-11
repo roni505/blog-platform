@@ -11,9 +11,10 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "@repo/zod-schemas": "*",
     "@repo/ui": "*",
+    "@repo/zod-schemas": "*",
     "@types/react-scroll": "^1.8.10",
+    "axios": "^1.7.9",
     "next": "^15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import { Prisma, PrismaClient } from '@prisma/client/edge'
+import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate';
-import { jwt, sign, verify } from 'hono/jwt';
+import { sign } from 'hono/jwt';
 import { signUpValidation } from "@repo/zod-schemas/validation";
 
 export const userRounter = new Hono<{
@@ -26,10 +26,21 @@ export const userRounter = new Hono<{
         })
       }
       const {name, email, password} = validation.data
+      //chekcing for exisitng users
+      const existingUser = await prisma.user.findUnique({
+        where: {
+          email
+        }
+      })
+      if (existingUser) {
+        return c.json({
+          message: "User already exists"
+        }, 400)
+      }
       const res = await prisma.user.create({
         data: {
-          email: email,
           name: name,
+          email: email,
           password: password
         },
         select: {
@@ -42,12 +53,15 @@ export const userRounter = new Hono<{
       });
     } catch (error) {
       console.error("Cannot sign-in users", error);
+      return c.json({
+        error: "Error creating user"
+      }, 400)
     } finally {
       prisma.$disconnect();
     }
   })
   
-  userRounter.post('/sign-up', async (c) => {
+  userRounter.post('/login', async (c) => {
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL
     }).$extends(withAccelerate())
@@ -66,20 +80,13 @@ export const userRounter = new Hono<{
 
     if (!res) {
       return c.json({
-        message: "res is empty"
+        message: "Please Sign-In first"
       })
     }
     
     const token = await sign({id: res.id}, c.env.JWT_SECRET)
-    
-    if (!res) {
-      return c.json({
-        message: "Please sign up first"
-      })
-    } else {
-      return c.json({
-        message: "Welcome to the app",
-        jwt: token
-      })
-    }
+    return c.json({
+      message: "Welcome to the app",
+      jwt: token
+    })
   })
