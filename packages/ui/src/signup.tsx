@@ -1,13 +1,13 @@
-'use client'
 
 import axios from "axios";
 import Button from "./button";
 import { signUpValidation } from "@repo/zod-schemas/validation";
+import  { redirect }  from "next/navigation";
 
-const handelClick = async (fromData: FormData) => {
+const handleClick = async (fromData: FormData) => {
+    "use server";
     try {
-        console.log("Form sumbit button as been clicked");
-        alert("Btn clicked")
+        console.log("Submit has been pressed");
         
         const name = fromData.get('name');
         const password = fromData.get('password');
@@ -19,36 +19,26 @@ const handelClick = async (fromData: FormData) => {
             return console.log("incorrect input");
         } else {
             console.log("Input is correct");
-            
         }
-        const res = await axios.post("https://my-app.jyotimukherjeeadra86.workers.dev/api/user/sign-in", {
-            name,
-            email,
-            password
-        }, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        const res = await fetch("https://my-app.jyotimukherjeeadra86.workers.dev/api/user/sign-in", {
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({
+                name,
+                email,
+                password
+            })
         })
-        console.log("API response: ", res.data);
-        
-        if (res.data.jwt) {
-            localStorage.setItem("token", res.data.jwt)
-            console.log(name, password, email, res.data.jwt)   
-        } else {
-            console.log("Token is missing");
-            
-        }
+        // console.log("API response: ",await res.json());
+        redirect("/login")
     } catch (error) {
         console.error("Error:", error);
-        
     }
 }
 
-
 const SignUp = () => {
     return (
-        <form action={handelClick}>
+        <form action={handleClick}>
             <input type="text" name="name" id="name" placeholder="Name" />
             <input type="email" name="email" id="email"placeholder="Email" />
             <input type="password" name="password" id="password" placeholder="Password" />

@@ -3,15 +3,26 @@ import { Prisma, PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { jwt, sign, verify, decode } from 'hono/jwt';
 import { createBlog, updateBlog } from "@repo/zod-schemas/validation"
+import {
+  getCookie,
+  getSignedCookie,
+  setCookie,
+  setSignedCookie,
+  deleteCookie,
+} from 'hono/cookie'
+
+import { csrf } from "hono/csrf";
 
 type JwtPayload = {
     id: string;
   };
 
+
 export const blogRounter = new Hono<{
     Bindings: {
         DATABASE_URL: string,
-        JWT_SECRET: string
+        JWT_SECRET: string,
+        COOKIE_SECRET: string
     },
     Variables: {
         UserID: string
@@ -24,13 +35,18 @@ blogRounter.use('/*', async(c, next) => {
     }
 
     try {
-      const token = c.req.header("Authorization") || "";
-      if (!token) {
-        return c.json({ message: "Authorization token missing" }, 401);
-    }
+      const signedCookie = await getSignedCookie(c, c.env.COOKIE_SECRET)
+      
+      if (!signedCookie || !signedCookie.auth_cookie) {
+        return c.json({
+          message: "No authentication token found"
+        }, 401);
+      } 
+      
+      const token = signedCookie.auth_cookie;
       const res =  await verify(token, c.env.JWT_SECRET) as JwtPayload; //making sure res is a string type
-
-    if (!res.id) {
+      
+      if (!res.id) {
         return c.json({ message: "ID is missing in JWT", res }, 403);
     }
 

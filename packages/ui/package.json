@@ -8,6 +8,8 @@
     "dist"
   ],
   "exports": {
+    "./allblogs": "./src/allBlogs.tsx",
+    "./joinIn": "./src/joinIn.tsx",
     "./signup": "./src/signup.tsx",
     "./stack": "./src/stack.tsx",
     "./hero": "./src/hero.tsx",

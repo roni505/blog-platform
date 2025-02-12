@@ -1,8 +1,8 @@
+import JoinIn from "@repo/ui/joinIn";
+
 const Login = () => {
     return (
-        <div className="bg-white">
-            This is the login page
-        </div>
+        <JoinIn />
     )
 }
 
