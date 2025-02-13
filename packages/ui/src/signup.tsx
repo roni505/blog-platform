@@ -2,7 +2,7 @@
 import axios from "axios";
 import Button from "./button";
 import { signUpValidation } from "@repo/zod-schemas/validation";
-import  { redirect }  from "next/navigation";
+import { redirect } from 'next/navigation';
 
 const handleClick = async (fromData: FormData) => {
     "use server";
@@ -20,20 +20,21 @@ const handleClick = async (fromData: FormData) => {
         } else {
             console.log("Input is correct");
         }
-        const res = await fetch("https://my-app.jyotimukherjeeadra86.workers.dev/api/user/sign-in", {
-            method: "POST",
-            headers: { "Content-Type": "application/json"},
-            body: JSON.stringify({
-                name,
-                email,
-                password
-            })
-        })
-        // console.log("API response: ",await res.json());
-        redirect("/login")
+        const res = await axios.post("http://127.0.0.1:8787/api/user/sign-in", {
+            name,
+            password,
+            email
+        }, {
+            headers: {
+                "Content-Type" : "application/json"
+            }, 
+            withCredentials: true
+        },)
+        console.log("API response: ",res);
     } catch (error) {
         console.error("Error:", error);
     }
+    redirect("/blogs")
 }
 
 const SignUp = () => {

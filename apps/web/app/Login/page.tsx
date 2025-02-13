@@ -1,4 +1,4 @@
-import JoinIn from "@repo/ui/joinIn";
+import JoinIn from "@repo/ui/JoinIn";
 
 const Login = () => {
     return (

@@ -45,6 +45,8 @@ blogRounter.use('/*', async(c, next) => {
       
       const token = signedCookie.auth_cookie;
       const res =  await verify(token, c.env.JWT_SECRET) as JwtPayload; //making sure res is a string type
+      console.log(token);
+      
       
       if (!res.id) {
         return c.json({ message: "ID is missing in JWT", res }, 403);

@@ -1,4 +1,5 @@
 import Button from "./button"
+import Link from 'next/link'
 
 const Hero = () => {
     return (
@@ -7,7 +8,9 @@ const Hero = () => {
           Write, Inspire, and Connect with the World 
        </h1>
        <div className="ui-flex ui-justify-center ui-mt-4">
-       <Button>Start Reading</Button>
+        <Link href="/blogs">
+       <Button text="Start reading..." variant="primary" size="lg" />
+        </Link>
        </div>
      </section>
     )

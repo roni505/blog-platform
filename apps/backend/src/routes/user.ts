@@ -57,7 +57,7 @@ export const userRounter = new Hono<{
       })
       const token = await sign({id: res.id}, c.env.JWT_SECRET)
       // cookie
-      await setSignedCookie(
+      const cookie = await setSignedCookie(
         c,
         "auth_cookie",
         token,
@@ -67,16 +67,21 @@ export const userRounter = new Hono<{
           secure: false,
           httpOnly: true,
           sameSite: "None",
-          maxAge: 1000
+          maxAge: 60 * 60 * 24, 
         }
       )
+      console.log("This is the cookie: ", cookie);
+      
       return c.json({
-        message: "Account created successfully"
+        success: true,
+        message: "Account created successfully",
+        cookie
       });
     } catch (error) {
       console.error("Cannot sign-in users", error);
       return c.json({
-        error: "Error creating user"
+        success: false,
+        message: "Error creating user"
       }, 400)
     } finally {
       prisma.$disconnect();
@@ -87,7 +92,8 @@ export const userRounter = new Hono<{
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL
     }).$extends(withAccelerate())
-    // find user from data base 
+    try {
+          // find user from data base 
     const body = await c.req.json();
     const res = await prisma.user.findUnique({
       where: {
@@ -98,7 +104,6 @@ export const userRounter = new Hono<{
         id: true
       }
     })
-    console.log("User details", res);
     if (!res) {
       return c.json({
         message: "Please Sign-In first"
@@ -106,7 +111,7 @@ export const userRounter = new Hono<{
     }
     
     const token = await sign({id: res.id}, c.env.JWT_SECRET)
-    await setSignedCookie(
+    const cookie = await setSignedCookie(
       c,
       "auth_cookie",
       token,
@@ -119,8 +124,19 @@ export const userRounter = new Hono<{
         maxAge: 60 * 60 * 24 * 7 // 🔄 7 days instead of 1000ms (1 sec)
       }
     )
+    console.log("This is the cookie", cookie);
+    
     return c.json({
+      success: true,
       message: "Welcome to the app",
       token
     })
+    } catch (error) {
+      console.error("Login Failed", error);
+      return c.json({
+        success: false,
+        message: "Unable to login"
+      })
+    }
+
   })
