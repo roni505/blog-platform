@@ -8,6 +8,7 @@
     "dist"
   ],
   "exports": {
+    "./blogDetails": "./src/blog-details.tsx",
     "./allblogs": "./src/allBlogs.tsx",
     "./JoinIn": "./src/joinIn.tsx",
     "./signup": "./src/signup.tsx",
@@ -38,6 +39,7 @@
     "@types/react": "^19.0.7",
     "@types/react-scroll": "^1.8.10",
     "autoprefixer": "^10.4.20",
+    "date-fns": "^4.1.0",
     "eslint": "^9.19.0",
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17",

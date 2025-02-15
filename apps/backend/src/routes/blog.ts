@@ -3,20 +3,10 @@ import { Prisma, PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { jwt, sign, verify, decode } from 'hono/jwt';
 import { createBlog, updateBlog } from "@repo/zod-schemas/validation"
-import {
-  getCookie,
-  getSignedCookie,
-  setCookie,
-  setSignedCookie,
-  deleteCookie,
-} from 'hono/cookie'
-
-import { csrf } from "hono/csrf";
 
 type JwtPayload = {
     id: string;
   };
-
 
 export const blogRounter = new Hono<{
     Bindings: {
@@ -30,36 +20,29 @@ export const blogRounter = new Hono<{
 }>()
 
 blogRounter.use('/*', async(c, next) => {
-    if (c.req.path == '/all-blogs') {
-        return next();
-    }
+  if (c.req.path == '/api/blog/all-blogs') {
+      return next();
+  }
 
-    try {
-      const signedCookie = await getSignedCookie(c, c.env.COOKIE_SECRET)
-      
-      if (!signedCookie || !signedCookie.auth_cookie) {
-        return c.json({
-          message: "No authentication token found"
-        }, 401);
-      } 
-      
-      const token = signedCookie.auth_cookie;
-      const res =  await verify(token, c.env.JWT_SECRET) as JwtPayload; //making sure res is a string type
-      console.log(token);
-      
-      
-      if (!res.id) {
-        return c.json({ message: "ID is missing in JWT", res }, 403);
-    }
+  try {
+    const token = c.req.header("Authorization") || "";
+    if (!token) {
+      return c.json({ message: "Authorization token missing" }, 401);
+  }
+    const res =  await verify(token, c.env.JWT_SECRET) as JwtPayload; //making sure res is a string type
 
-    c.set("UserID", res.id);
-    console.log("Extracted UserID:", res.id);
-      await next();
-    } catch (error) {
-      return c.json({
-        message: "Invalid or token expired"
-      })
-    }
+  if (!res.id) {
+      return c.json({ message: "ID is missing in JWT", res }, 403);
+  }
+
+  c.set("UserID", res.id);
+  console.log("Extracted UserID:", res.id);
+    await next();
+  } catch (error) {
+    c.json({
+      message: "Invalid or token expired"
+    })
+  }
 })
 
 // This route is use for creating blogs 
@@ -177,12 +160,19 @@ blogRounter.get('/all-blogs', async (c) => {
     const allBlogs = await prisma.post.findMany({
       select: {
         title: true,
-        content: true
+        content: true,
+        id: true,
+        createdAt: true,
+        author: {
+          select: {
+            name: true
+          }
+        }
       }
     })
     return c.json({
       message: "This are all the blogs",
-      blogs: allBlogs
+      blogs: allBlogs,
     })
   } catch (error) {
     console.error("Cannot find blog", error);

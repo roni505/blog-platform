@@ -9,12 +9,15 @@ export const signUpValidation = z.object({
 
 export const loginValidation = z.object({
     email: z.string().email(),
-    password: z.number().min(6)
+    password: z.string().min(6)
 })
 
 export const createBlog = z.object({
     title: z.string(),
-    content: z.string()
+    content: z.string(),
+    id: z.string().optional(),
+    createdAt: z.date().optional(),
+    updateAt: z.date().optional()
 })
 
 export const updateBlog = z.object({

@@ -7,29 +7,31 @@ const handleLogin = async (fromData: FormData) => {
     'use server'
         console.log("Button clicked");
         
-        const email = fromData.get('email');
-        const password = fromData.get('password');
-        console.log(email, password);
-        
-        const result = loginValidation.safeParse({email, password})
-        if (!result.success) {
-            console.log("Incorrect input");
-        } else {
-            return console.log("Input correct"); 
-        }
-        const res = await axios.post("http://127.0.0.1:8787/api/user/login", {
-            email,
-            password
-        }, {
-            headers: {
-                "Content-Type" : "application/json"
-            },
-            withCredentials: true
-        })
-        console.log("This is the response: ", res);
-        if (res.status === 200 && res.data.success) {
-            redirect("/blogs")
-        }
+    const email = fromData.get('email');
+    const password = fromData.get('password');
+    console.log(email, password);
+    
+    const result = loginValidation.safeParse({email, password})
+    if (!result.success) {
+        return console.log("zod error",result.success);
+    } else {
+        console.log("Input correct"); 
+    }
+    const res = await axios.post("http://localhost:8787/api/user/login", {
+        email,
+        password
+    }, {
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        withCredentials: true
+    })
+    console.log("This is the response: ", res.headers);
+    if (res.status === 200 && res.data.success) {
+        const token = res.data.jwt;
+        localStorage.setItem("token", token)
+        redirect("/blogs")
+    }
 }
 
 const JoinIn = async () => {
@@ -45,3 +47,18 @@ const JoinIn = async () => {
 }
 
 export default JoinIn;
+
+
+
+
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+// eyJpZCI6ImNjOGRhNjUyLTAzMDEtNDZlZS05ZWNmLTk4NmYzYWVmNTZiNyJ9.
+// rWv-TQJPX3K1iRlx72J0ZkYJZxWGt1-smY_iZBJNdac
+
+
+
+// auth_cookie=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+// eyJpZCI6ImNjOGRhNjUyLTAzMDEtNDZlZS05ZWNmLTk4NmYzYWVmNTZiNyJ9.
+// rWv-TQJPX3K1iRlx72J0ZkYJZxWGt1-smY_iZBJNdac.
+// zBu7MBTYWU3aY5sUNVD%2Fg8%2BCdaYchAjAQcVRjJeGyF8%3D

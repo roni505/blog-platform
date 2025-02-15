@@ -14,10 +14,10 @@ const app = new Hono<{
 app.use(
   '*',
   cors({
-    origin: '*',
+    origin: "http://localhost:3000",
     // allowHeaders: ['X-Custom-Header', 'Upgrade-Insecure-Requests'],
     allowMethods: ['POST', 'GET', 'OPTIONS', 'DELETE', 'PUT'],
-    allowHeaders: ['Content-Type', 'Authorization'],
+    allowHeaders: ["Content-Type", "Authorization", "Cookie"], // Allow specific headers
     maxAge: 600,
     credentials: true,
   })
