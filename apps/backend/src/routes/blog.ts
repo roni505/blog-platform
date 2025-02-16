@@ -135,7 +135,13 @@ blogRounter.get('/givenID/:id', async(c) => {
       },
       select: {
         title: true,
-        content: true
+        content: true,
+        createdAt: true,
+        author: {
+          select: {
+            name: true
+          }
+        }
       }
     })
     return c.json({

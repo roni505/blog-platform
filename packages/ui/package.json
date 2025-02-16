@@ -33,6 +33,7 @@
     "react": "^19.0.0"
   },
   "devDependencies": {
+    "@repo/stores": "*",
     "@repo/eslint-config": "*",
     "@repo/tailwind-config": "*",
     "@repo/typescript-config": "*",
