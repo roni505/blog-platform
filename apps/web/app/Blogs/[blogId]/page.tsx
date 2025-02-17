@@ -5,10 +5,12 @@ import axios from "axios";
 import { useParams } from "next/navigation";
 import Button from "@repo/ui/button";
 import { useBlogStore } from "../../../stores/store-provider";
+import { useRouter } from "next/navigation";
+
 
 const Blog = () => {
     // console.log( useBlogStore );
-    
+    const router = useRouter();
     const params = useParams();
     const blogID = params.blogId;
     const blog = useBlogStore((state: any) => state.blog);
@@ -34,7 +36,7 @@ const Blog = () => {
     useEffect(() => {
         const fetchBlog = async () => {
             try {
-                console.log("Control is here");
+                // console.log("Control is here");
                 
                 const res = await axios.get(`http://127.0.0.1:8787/api/blog/givenID/${blogID}`, {
                     headers: { "Authorization": token },
@@ -42,7 +44,9 @@ const Blog = () => {
                 });
                 setBlog(res.data.post);
                 console.log(res.data.post);
-                console.log("From blog state: ", blog);
+                
+                // console.log(res.data.post);
+                // console.log("From blog state: ", blog);
                 
             } catch (error) {
                 console.error("Error fetching blog:", error);
@@ -55,7 +59,10 @@ const Blog = () => {
             fetchBlog();
         }
     }, [token, params.item]);  // ✅ Only runs when token and params.item are available
-    
+
+    useEffect(() => {
+        console.log("Updated blog state:", blog);
+    }, [blog]); // ✅ Log when blog updates
 
     if (loading) return <p className="bg-white">Loading blog...</p>;
     if (!blog) return <p className="bg-white">Blog not found</p>;
@@ -68,7 +75,7 @@ const Blog = () => {
             <h1>{blog.title}</h1>
             <p>{blog.content}</p>
             <div className=" flex gap-6">
-            <Button text="Edit Post" variant="primary" size="lg" />
+            <Button text="Edit Post" variant="primary" size="lg" onClick={() => router.push(`/blogs/&{blogID}/edit`)} />
             <Button text="Delete" variant="secondary" size="lg" />
             </div>
         </div>
