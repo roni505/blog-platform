@@ -14,7 +14,10 @@ const fetchBlogs = async () => {
 const AllBlogs = async () => {
     const blogs = await fetchBlogs();
     return (
-        <div>
+        <div> 
+            <Link href="/create-blog">
+            <Button text="Create New Blog" variant="primary" size="lg" />
+            </Link>
             {blogs.map((blog: CreateBlog) => {
                 return (
                     <Link href={`/blogs/${blog.id}`} key={blog.id}>
@@ -29,7 +32,6 @@ const AllBlogs = async () => {
                     </Link>
                 )
                 })}
-                <Button variant="primary" text="Update" size="lg" />
         </div>
     )
 }
