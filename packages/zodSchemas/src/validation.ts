@@ -1,3 +1,4 @@
+import { id } from "date-fns/locale";
 import { z } from "zod";
 
 // zod Schema
@@ -17,8 +18,13 @@ export const createBlog = z.object({
     content: z.string(),
     id: z.string().optional(),
     createdAt: z.date().optional(),
-    updateAt: z.date().optional()
-})
+    updateAt: z.date().optional(),
+    author: z.object({
+        name: z.string()
+    })
+});
+
+export const UserIDZod = z.string().uuid("Invalid user ID formate");
 
 export const updateBlog = z.object({
     title: z.string(),

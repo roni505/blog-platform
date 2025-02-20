@@ -67,17 +67,16 @@ userRounter.post('/login', async (c) => {
 
   if (!res) {
     return c.json({
-      message: "res is empty"
+      message: "Invalid user name or password"
     })
   }
   const token = await sign({id: res.id}, c.env.JWT_SECRET)
   return c.json({
+    success: true,
     message: "Welcome to the app",
     jwt: token
   })
   } catch (error) {
     console.error("Cannot login", error);
-  } finally {
-    prisma.$disconnect();
   }
 }) 

@@ -1,64 +1,33 @@
-import Button from "./button"
-import axios from "axios";
-import { loginValidation } from "@repo/zod-schemas/validation";
-import { redirect } from "next/navigation";
+"use client";
 
-const handleLogin = async (fromData: FormData) => {
-    'use server'
-        console.log("Button clicked");
-        
-    const email = fromData.get('email');
-    const password = fromData.get('password');
-    console.log(email, password);
-    
-    const result = loginValidation.safeParse({email, password})
-    if (!result.success) {
-        return console.log("zod error",result.success);
-    } else {
-        console.log("Input correct"); 
-    }
-    const res = await axios.post("http://localhost:8787/api/user/login", {
-        email,
-        password
-    }, {
-        headers: {
-            "Content-Type" : "application/json"
-        },
-        withCredentials: true
-    })
-    console.log("This is the response: ", res.headers);
-    if (res.status === 200 && res.data.success) {
-        const token = res.data.jwt;
-        localStorage.setItem("token", token)
-        redirect("/blogs")
-    }
-}
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { handleLogin } from "./handel-login";
+import Button from "./button";
 
-const JoinIn = async () => {
+export default function JoinIn() {
+    const router = useRouter();
+    const [error, setError] = useState<string | null>(null);
+
+    const handleFormSubmit = async (formData: FormData) => {
+        const result = await handleLogin(formData);
+        console.log(result);
+        if (result.success) {
+            localStorage.setItem("token", result.token); // ✅ Client-side storage
+            router.push("/blogs"); // ✅ Redirect from client
+        } else {
+            setError(result.error);
+        }
+    };
+
     return (
-        <form action={handleLogin}>
+        <form action={handleFormSubmit}>
             <div>
-            <input type="email" name="email" id="email" placeholder="Email" />
-            <input type="password" name="password" id="password" placeholder="Password" />
-            <Button text="Login" variant="primary" size="lg"/>
+                <input type="email" name="email" id="email" placeholder="Email" required />
+                <input type="password" name="password" id="password" placeholder="Password" required />
+                <Button text="Login" variant="primary" size="lg" />
+                {error && <p style={{ color: "red" }}>{error}</p>}
             </div>
         </form>
-    )
+    );
 }
-
-export default JoinIn;
-
-
-
-
-
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-// eyJpZCI6ImNjOGRhNjUyLTAzMDEtNDZlZS05ZWNmLTk4NmYzYWVmNTZiNyJ9.
-// rWv-TQJPX3K1iRlx72J0ZkYJZxWGt1-smY_iZBJNdac
-
-
-
-// auth_cookie=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-// eyJpZCI6ImNjOGRhNjUyLTAzMDEtNDZlZS05ZWNmLTk4NmYzYWVmNTZiNyJ9.
-// rWv-TQJPX3K1iRlx72J0ZkYJZxWGt1-smY_iZBJNdac.
-// zBu7MBTYWU3aY5sUNVD%2Fg8%2BCdaYchAjAQcVRjJeGyF8%3D

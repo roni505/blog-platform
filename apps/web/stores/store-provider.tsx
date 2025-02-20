@@ -17,11 +17,11 @@ interface BlogStoreProviderProps {
 
 // Create the Provider Component
 export const BlogStoreProvider = ({ children }: BlogStoreProviderProps) => {
-  const storeRef = useRef<BlogStore | null>(null);
+  const storeRef = useRef<BlogStore | undefined>(undefined);
 
   // Initialize Store Once
   if (!storeRef.current) {
-    storeRef.current = createBlogStore({ blog: null, setBlog: () => {} });
+    storeRef.current = createBlogStore(); // ✅ Fix: No parameters needed
   }
 
   return (
@@ -41,3 +41,4 @@ export const useBlogStore = <T,>(selector: (state: BlogState) => T): T => {
 
   return useStore(store, selector);
 };
+

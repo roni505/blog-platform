@@ -1,4 +1,5 @@
-import BlogCreator from "@repo/ui/BlogCreator";
+import BlogCreator from "../../ui/blog-creator";
+
 
 const CreateBlog = () => {
     return (

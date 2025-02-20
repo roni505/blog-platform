@@ -8,10 +8,11 @@ export type Blog = z.infer<typeof createBlog>;
 // type for store  
 export type BlogState = { 
   blog: Blog | null;
+  setBlog: (blog: Blog) => void;
 };
 
 //load state from sessionStorage  
-const loadState = (): BlogState => {
+const loadState = (): Omit<BlogState, "setBlog"> => {
   if (typeof window !== "undefined") {
     const storedState = sessionStorage.getItem("blogState");
     return storedState ? JSON.parse(storedState) : { blog: null };
@@ -20,8 +21,8 @@ const loadState = (): BlogState => {
 };
 
 // defining store  
-export const createBlogStore = (initState: BlogState & { setBlog: (blog: Blog) => void }) => {
-  return createStore<typeof initState>()((set) => ({
+export const createBlogStore = () => {
+  return createStore<BlogState>()((set) => ({
     ...loadState(),
     setBlog: (blog) => {
       set(() => ({ blog }));

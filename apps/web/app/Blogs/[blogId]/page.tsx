@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import Button from "@repo/ui/button";
 import { useBlogStore } from "../../../stores/store-provider";
 import { useRouter } from "next/navigation";
+import { BlogState } from "../../../stores/blog-store";
 
 
 const Blog = () => {
@@ -16,7 +17,7 @@ const Blog = () => {
     const blog = useBlogStore((state: any) => state.blog);
     
     
-    const setBlog = useBlogStore((state: any) => state.setBlog);
+    const setBlog = useBlogStore((state: BlogState) => state.setBlog);
     // const blogDetails = blogStore((state: any) => state.blogDetails) as any
     // console.log(blogDetails);
     

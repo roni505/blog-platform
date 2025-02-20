@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { Prisma, PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { jwt, sign, verify, decode } from 'hono/jwt';
-import { createBlog, updateBlog } from "@repo/zod-schemas/validation"
+import { UserIDZod, createBlog, updateBlog } from "@repo/zod-schemas/validation"
 
 type JwtPayload = {
     id: string;
@@ -12,7 +12,6 @@ export const blogRounter = new Hono<{
     Bindings: {
         DATABASE_URL: string,
         JWT_SECRET: string,
-        COOKIE_SECRET: string
     },
     Variables: {
         UserID: string
@@ -59,19 +58,31 @@ blogRounter.post('/create-blog', async (c) => {
         message: "User Input is incorrect"
       })
     }
-
-    const {title, content} = validate.data;
     const id = c.get("UserID")
-    if (!id) {
-        return c.json({
-            message: "User id not found"
-        }, 403)
+    const validateUserID = UserIDZod.safeParse(id);
+    if (!validateUserID.success) {
+      return c.json({
+        message: "Incorret User ID type",
+        validateUserID
+      })
     }
+    const  userID  = validateUserID.data
+    const {title, content} = validate.data;
     const post = await prisma.post.create({
       data: {
         title: title,
         content: content,
-        author_id: id
+        author_id: userID
+      }, select: {
+        title: true,
+        content: true,
+        author_id: true,
+        createdAt: true,
+        author: {
+          select: {
+            name: true
+          }
+        }
       }
     })
     return c.json({
@@ -145,10 +156,16 @@ blogRounter.get('/givenID/:id', async(c) => {
         }
       }
     })
-    return c.json({
-      message: "Successfully found the blog",
-      post: blog
-    })
+    if (blog) {
+      return c.json({
+        message: "Blog is found",
+        post: blog
+      })
+    } else {
+      return c.json({
+        message: "Cannot find blog"
+      }, 400)
+    }
   } catch (error) {
     console.error("Cannot find blog", error);
     return c.json({
