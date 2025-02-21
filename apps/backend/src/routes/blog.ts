@@ -1,8 +1,8 @@
 import { Hono } from "hono";
-import { Prisma, PrismaClient } from '@prisma/client/edge'
+import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate';
-import { jwt, sign, verify, decode } from 'hono/jwt';
-import { UserIDZod, createBlog, updateBlog } from "@repo/zod-schemas/validation"
+import { verify } from 'hono/jwt';
+import { idSchema, createBlog, updateBlog } from "@repo/zod-schemas/validation";
 
 type JwtPayload = {
     id: string;
@@ -54,19 +54,12 @@ blogRounter.post('/create-blog', async (c) => {
     const body = await c.req.json();
     const validate = createBlog.safeParse(body);
     if (!validate.success) {
+      console.log(validate.success);
       return c.json({
         message: "User Input is incorrect"
       })
     }
-    const id = c.get("UserID")
-    const validateUserID = UserIDZod.safeParse(id);
-    if (!validateUserID.success) {
-      return c.json({
-        message: "Incorret User ID type",
-        validateUserID
-      })
-    }
-    const  userID  = validateUserID.data
+    const userID = c.get("UserID")
     const {title, content} = validate.data;
     const post = await prisma.post.create({
       data: {
@@ -171,6 +164,47 @@ blogRounter.get('/givenID/:id', async(c) => {
     return c.json({
       message: "Cannot find post"
     })
+  }
+})
+
+// route to delete post
+blogRounter.delete('/delete', async (c) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL
+  }).$extends(withAccelerate())
+
+  try {
+    const body = c.req.query("id");
+    const validation = idSchema.safeParse(body);
+    console.log(validation, validation.error);
+    
+    if (!validation.success) {
+      return c.json({
+        message: "ID is incorrect"
+      })
+    }
+    const { id } = validation.data;
+    const deleteBlog = await prisma.post.delete({
+      where: {
+        id: id
+      }, select: {
+        title: true,
+        author: {
+          select: {
+            name: true
+          }
+        }
+      }
+    })    
+    return c.json({
+      message: "Post has been delete",
+      deleteBlog
+    })
+  } catch (error) {
+    console.error("Cannot delete post", error);
+    return c.json({
+      message: "Post already deleted"
+    }, 404)
   }
 })
 

@@ -9,10 +9,11 @@ export type Blog = z.infer<typeof createBlog>;
 export type BlogState = { 
   blog: Blog | null;
   setBlog: (blog: Blog) => void;
+  deleteBlog: (postID: string) => void;
 };
 
 //load state from sessionStorage  
-const loadState = (): Omit<BlogState, "setBlog"> => {
+const loadState = (): Omit<BlogState, "setBlog" | "deleteBlog"> => {
   if (typeof window !== "undefined") {
     const storedState = sessionStorage.getItem("blogState");
     return storedState ? JSON.parse(storedState) : { blog: null };
@@ -30,6 +31,19 @@ export const createBlogStore = () => {
         sessionStorage.setItem("blogState", JSON.stringify({ blog }));
       }
     },
+
+    deleteBlog: (postID) => {
+      set((state) => {
+        if (state.blog?.id === postID) {
+          const updatedState = { blog: null };
+          if (typeof window !== "undefined") {
+            sessionStorage.setItem("blogState", JSON.stringify(updatedState))
+          }
+          return updatedState;
+        }
+        return state;
+      });
+    }
   }));
 };
 

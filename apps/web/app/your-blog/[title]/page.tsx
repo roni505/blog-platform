@@ -1,11 +1,8 @@
 import PublishedBlog from "../../../ui/published-blog";
 
-const PostPublishedPage = ({ params }: { params: { slug: string } }) => {
+const PostPublishedPage = () => {
     return (
-        <>
-                <h1>Blog Title: {decodeURIComponent(params.slug)}</h1>
-                <PublishedBlog />
-        </>
+        <PublishedBlog />
     )
 }
 

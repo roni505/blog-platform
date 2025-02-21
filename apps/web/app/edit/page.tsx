@@ -1,6 +1,6 @@
 'use client'
 
-import { useBlogStore } from "../../../../stores/store-provider";
+import { useBlogStore } from "../../stores/store-provider";
 import Button from "@repo/ui/button";
 import { useRouter } from "next/navigation";
 import axios from "axios";

@@ -1,4 +1,3 @@
-import { id } from "date-fns/locale";
 import { z } from "zod";
 
 // zod Schema
@@ -20,11 +19,13 @@ export const createBlog = z.object({
     createdAt: z.date().optional(),
     updateAt: z.date().optional(),
     author: z.object({
-        name: z.string()
-    })
+        name: z.string().optional()
+    }).optional()
 });
 
-export const UserIDZod = z.string().uuid("Invalid user ID formate");
+export const idSchema = z.object({
+    id: z.string().uuid("Invalid user ID formate")
+});
 
 export const updateBlog = z.object({
     title: z.string(),
@@ -33,6 +34,7 @@ export const updateBlog = z.object({
 })
 
 // type-inference
+export type IDType = z.infer<typeof idSchema>
 export type SignUpValidation = z.infer<typeof signUpValidation>
 export type LoginValidation = z.infer<typeof loginValidation>
 export type UpdateBlog = z.infer<typeof updateBlog>

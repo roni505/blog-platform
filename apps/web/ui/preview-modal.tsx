@@ -12,15 +12,16 @@ const PreviewModal = ({isOpen, onClose, blog}: Props) => {
     const setBlog = useBlogStore((state: BlogState) => state.setBlog)
     
     // render component only when save is pressed
-    if (!isOpen) {
+    if (!isOpen || !blog) {
         return null;
     }
 
     const handleSave = async () => {
         setBlog(blog);
+        console.log(blog);
         
         const title = blog.title;
-        router.push(`/your-blog/${title}`);
+        router.push(`/your-blog/${encodeURIComponent(title)}`);
 
         setTimeout(async () => {
             const token = localStorage.getItem("token");
@@ -41,6 +42,7 @@ const PreviewModal = ({isOpen, onClose, blog}: Props) => {
     return (
         <div>
             <h1>{blog.title}</h1>
+            <p>{blog.author?.name}</p>
             <p>{blog.content}</p>
             <Button 
             text="Canel" 

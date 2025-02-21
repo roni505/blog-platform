@@ -27,11 +27,13 @@ const BlogCreator = () => {
         setBlog((prev) => ({...prev, [name]: value}))
     }
 
+    const isDisabled = !blog.title.trim() || !blog.content.trim();
+
     return (
         <div className="text-white flex gap-3 flex-col max-w-7xl items-center mx-auto">
             <label htmlFor="">{blog.title}</label>
             <textarea 
-            className="text-black"
+            className="bg-black"
             value={blog.title}
             name="title" 
             id="title"
@@ -40,15 +42,21 @@ const BlogCreator = () => {
             >
             </textarea>
             <textarea 
-            className="text-black"
+            className="bg-black"
             value={blog.content}
             name="content" 
-            id=""
+            id="content"
             onChange={handelChange}
             placeholder="Please enter your content here"
             >
             </textarea>
-            <Button text="Save" variant="primary" size="lg" onClick={() => setModalOpen(true)} />
+            <Button 
+            text="Save" 
+            variant="primary" 
+            size="lg" 
+            onClick={() => setModalOpen(true)}
+            disabled={isDisabled}
+            />
             <PreviewModal 
             isOpen = {modalOpen}
             onClose = {() => setModalOpen(false)}
