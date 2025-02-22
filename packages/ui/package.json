@@ -8,6 +8,8 @@
     "dist"
   ],
   "exports": {
+    "./blog-input": "./src/blog-input.tsx",
+    "./input": "./src/input.tsx",
     "./BlogCreator": "./src/BlogCreator.tsx",
     "./blogDetails": "./src/blog-details.tsx",
     "./allblogs": "./src/allBlogs.tsx",

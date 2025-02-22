@@ -8,7 +8,6 @@ import { useBlogStore } from "../../../stores/store-provider";
 import { useRouter } from "next/navigation";
 import { BlogState } from "../../../stores/blog-store";
 
-
 const Blog = () => {
     // console.log( useBlogStore );
     const router = useRouter();
