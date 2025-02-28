@@ -48,8 +48,8 @@ const cardDataInput: CardInput[] = [
 
 const Carousel = () => {
   return (
-    <div className="ui-relative ui-w-full ui-mt-20 ui-overflow-hidden">
-      <div className="ui-flex ui-space-x-12 ui-w-max ui-animate-scroll">
+    <div className="relative w-full mt-20 overflow-hidden">
+      <div className="flex space-x-12 w-max animate-scroll">
       {[...cardDataInput, ...cardDataInput].map((cardData, index) => (
           <Card key={index} {...cardData} />
         ))}

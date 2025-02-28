@@ -15,7 +15,7 @@ body {
   }
 }
 
-.ui-animate-scroll {
+.animate-scroll {
   display: flex;
   width: max-content;
   animation: scroll 30s linear infinite;
