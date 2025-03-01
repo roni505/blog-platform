@@ -8,6 +8,7 @@
     "dist"
   ],
   "exports": {
+    "./appNavbar": "./src/app-navbar.tsx",
     "./blog-input": "./src/blog-input.tsx",
     "./input": "./src/input.tsx",
     "./BlogCreator": "./src/BlogCreator.tsx",

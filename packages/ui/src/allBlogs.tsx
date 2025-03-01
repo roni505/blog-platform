@@ -1,8 +1,7 @@
 import axios from "axios";
 import { CreateBlog } from "@repo/zod-schemas/validation";
-import { format } from "date-fns";
-import Button from "./button";
 import Link from "next/link";
+import Blog from "./blog";
 
 const fetchBlogs = async () => {
     const res = await axios.get("http://127.0.0.1:8787/api/blog/all-blogs");
@@ -11,23 +10,14 @@ const fetchBlogs = async () => {
 };
 
 const AllBlogs = async () => {
-    const blogs = await fetchBlogs();
+    const blogs = await fetchBlogs();    
     return (
         <div>
-            <Link href="/create-blog">
-                <Button text="Create New Blog" variant="primary" size="lg" />
-            </Link>
             {blogs.map((blog: CreateBlog) => {
                 return (
                     <Link href={`/blogs/${blog.id}`} key={blog.id}>
-                        <div className="text-white" key={blog.id}>
-                            <p>
-                                {blog.createdAt
-                                    ? format(blog.createdAt, "PP")
-                                    : "No date available"}
-                            </p>
-                            <h2>{blog.title}</h2>
-                            <p>{blog.content}</p>
+                        <div className="text-white px-5 sm:p-0 sm:max-w-2xl lg:max-w-2xl flex items-center mx-auto justify-center" key={blog.id}>
+                          <Blog title={blog.title} content={blog.content} publishedBy={blog.author?.name} date={blog.createdAt} />
                         </div>
                     </Link>
                 );

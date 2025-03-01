@@ -1,10 +1,11 @@
 import "./globals.css";
 import "@repo/ui/styles.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Source_Serif_4 } from "next/font/google";
 import { BlogStoreProvider } from "../stores/store-provider";
+import AppNavBar from "../ui/app-navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const sourceSerif = Source_Serif_4({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Turborepo",
@@ -18,7 +19,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={sourceSerif.className}>
+        <AppNavBar />
         <BlogStoreProvider>
           {children}
         </BlogStoreProvider>

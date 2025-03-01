@@ -13,8 +13,6 @@ const fetchBlog = async (slug: string) => {
 const BlogDetails = async ({ params }: { params: { slug: string } }) => {
     const blog = await fetchBlog(params.slug);
 
-    if (!blog) return <p>Blog not found</p>;
-
     return (
         <div className="ui-text-white">
             <h1>{blog.title}</h1>

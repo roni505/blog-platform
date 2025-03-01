@@ -6,9 +6,15 @@ const config: Pick<Config, "presets" | "content" | "theme"> = {
   presets: [sharedConfig], // Keep shared config
   theme: {
     extend: {
+      fontFamily: {
+        serif: ["Source Serif 4", "serif"],
+      },
       colors: {
+        btnHover: "#484848",
         dark: "#1F1F1F",
-        strokeColor: "#494949"
+        strokeColor: "#494949",
+        chipBg: "#111111",
+        hrColor: "#383838"
       }
     }
   }

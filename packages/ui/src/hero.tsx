@@ -9,7 +9,7 @@ const Hero = () => {
             </h1>
             <div className="flex justify-center mt-4">
                 <Link href="/blogs">
-                    <Button text="Start reading..." variant="primary" size="lg" />
+                    <Button text="Start reading" variant="secondary" size="lg" />
                 </Link>
             </div>
         </section>

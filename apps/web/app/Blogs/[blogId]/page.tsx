@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "next/navigation";
-import Button from "@repo/ui/button";
 import { useBlogStore } from "../../../stores/store-provider";
 import { useRouter } from "next/navigation";
 import { BlogState } from "../../../stores/blog-store";
+import { format } from "date-fns";
 
 const Blog = () => {
     // console.log( useBlogStore );
@@ -64,21 +64,32 @@ const Blog = () => {
         console.log("Updated blog state:", blog);
     }, [blog]); // ✅ Log when blog updates
 
-    if (loading) return <p className="bg-white">Loading blog...</p>;
-    if (!blog) return <p className="bg-white">Blog not found</p>;
+    if (loading) {
+        return <div className="text-white text-center">Loading...</div>;
+    }
 
     return (
-        <div className="text-white flex flex-col gap-2">
-            {/* <p>{blogDetails.content}</p> */}
-            <h1>{blog.author.name}</h1>
-            <p>{blog.createdAt}</p>
-            <h1>{blog.title}</h1>
-            <p>{blog.content}</p>
-            <div className=" flex gap-6">
-            <Button text="Edit Post" variant="primary" size="lg" onClick={() => router.push(`/blogs/&{blogID}/edit`)} />
-            <Button text="Delete" variant="secondary" size="lg" />
+        <>
+        <div className="flex flex-col px-5 sm:p-0 sm:max-w-2xl text-white items-start mx-auto">
+            <h1 className="text-2xl sm:text-3xl sm:leading-9 md:leading-8 md:text-4xl lg:text-4xl lg:font-semibold lg:leading-loose">
+                {blog?.title}
+            </h1>
+            <div className="flex gap-3 text-sm text-[#acacac] mt-6">
+                <div className="bg-chipBg p-2 rounded-lg">
+                    {blog?.createdAt ? format(new Date(blog.createdAt), "MMM d, yyyy") : "MM DD YYYY"}
+                </div>
+                <div className="bg-chipBg p-2 rounded-lg">
+                    Written by {blog.author.name || "Unknown"}
+                </div>
+            </div>
+            <hr className="mt-5 sm:mt-7 md:mt-8 lg:mt-9 border-hrColor w-full"/>
+            <div className="py-5 sm:py-6 md:py-8 lg:py-9">
+                <p className="font-extralight text-[#D7D7D7] leading-8 sm:leading-8 sm:text-base md:leading-9 md:text-lg lg:text-xl lg:leading-9">
+                    {blog.content}
+                </p>
             </div>
         </div>
+        </>
     );
 };
 
