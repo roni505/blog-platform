@@ -2,7 +2,7 @@ import { format } from "date-fns";
 
 const Blog = ({title, content, publishedBy, date}: any) => {    
     return (
-        <div className="px-3 py-4 hover:bg-[#101010] rounded-xl">
+        <div className="w-full px-3 py-4 hover:bg-[#101010] rounded-xl">
             <div className="flex flex-col items-start gap-6">
                 <div className="flex flex-col gap-4">
                     <h1 className="text-lg md:text-xl lg:text-2xl font-bold">

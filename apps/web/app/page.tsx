@@ -6,13 +6,14 @@ import Hero from "@repo/ui/hero";
 import Stack from "@repo/ui/stack"
 
 export default function Page() {
-  return (<div>
-      <Nav />
-      <Hero />
-      <Carousel />
-      <Stack />
-      <Subscription/>
-      <Footer/>
-  </div>
+  return (
+      <div>
+          <Nav />
+          <Hero />
+          <Carousel />
+          <Stack />
+          <Subscription/>
+          <Footer/>
+      </div>
   );
 }
