@@ -9,6 +9,10 @@ const jainiPurva = Jaini_Purva({ subsets: ["latin"], weight: "400" })
 
 const AppNavBar = () => {
     const pathName = usePathname();
+
+    if (pathName.startsWith("/your-blog")) {
+        return null;
+    }
     return (
         <nav className="text-white flex justify-between max-w-7xl p-6 mx-auto items-center">
             <Link href="/">

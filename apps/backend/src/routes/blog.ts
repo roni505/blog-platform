@@ -67,6 +67,7 @@ blogRounter.post('/create-blog', async (c) => {
         content: content,
         author_id: userID
       }, select: {
+        id:true,
         title: true,
         content: true,
         author_id: true,
@@ -174,16 +175,16 @@ blogRounter.delete('/delete', async (c) => {
   }).$extends(withAccelerate())
 
   try {
-    const body = c.req.query("id");
-    const validation = idSchema.safeParse(body);
-    console.log(validation, validation.error);
+    const id = c.req.query("id");
+    // const validation = idSchema.safeParse(body);
+    // console.log(validation, validation.error);
     
-    if (!validation.success) {
-      return c.json({
-        message: "ID is incorrect"
-      })
-    }
-    const { id } = validation.data;
+    // if (!validation.success) {
+    //   return c.json({
+    //     message: "ID is incorrect"
+    //   })
+    // }
+    // const { id } = validation.data;
     const deleteBlog = await prisma.post.delete({
       where: {
         id: id

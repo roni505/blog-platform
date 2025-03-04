@@ -15,12 +15,18 @@
     "@repo/zod-schemas": "*",
     "@types/react-scroll": "^1.8.10",
     "axios": "^1.7.9",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.477.0",
     "next": "^15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scroll": "^1.9.2",
-    "zustand": "^5.0.3",
-    "zod": "^3.22.2"
+    "react-toastify": "^11.0.5",
+    "tailwind-merge": "^3.0.2",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.22.2",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^15.1.6",

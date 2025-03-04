@@ -7,6 +7,7 @@ import { useBlogStore } from '../stores/store-provider';
 import { BlogState } from '../stores/blog-store';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
 
 const BlogCreator = () => {
     const [blog, setBlog] = useState<CreateBlog>({
@@ -19,17 +20,18 @@ const BlogCreator = () => {
     const setBlogState = useBlogStore((state: BlogState) => state.setBlog);
     const router = useRouter();
 
-    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         const { name, value } = e.target;
-        setBlog((prev) => ({ ...prev, [name]: value }));
-    };
+        setBlog((prev) => ({...prev, [name]: value}))
+    }
 
     const handleSave = async () => {
-        setBlogState(blog);
+        const loadingToast = toast.loading("Adding blog..")
+        // setBlogState(blog);
         console.log("Saving blog:", blog);
 
         const title = blog.title;
-        router.push(`/your-blog/${encodeURIComponent(title)}`);
+        // router.push(`/your-blog/${encodeURIComponent(title)}`);
 
         setTimeout(async () => {
             try {
@@ -44,6 +46,15 @@ const BlogCreator = () => {
                 const data = res.data.post;
                 console.log("Data after fetching:", data);
                 setBlogState(data);
+                if (res.status === 200) {
+                    toast.update(loadingToast, {
+                        render: "Blog is adding",
+                        onClose: () => router.push(`/your-blog/${encodeURIComponent(title)}`),
+                        autoClose: 2000,
+                        type: "success",
+                        isLoading: false
+                    })
+                }
             } catch (error) {
                 console.error("Error saving blog:", error);
             }
@@ -53,27 +64,41 @@ const BlogCreator = () => {
     const isDisabled = !blog.title.trim() || !blog.content.trim();
 
     return (
-        <div className="bg-black text-gray-300 p-4 flex items-center justify-center">
-            <main className="max-w-2xl w-full">
-                <div>
+            <main className="w-full max-w-2x ">
+                    <div className="mb-6">
                     <textarea
+                        name="title"
+                        id="title"
                         value={blog.title}
-                        className="w-full text-white bg-black focus:ring focus:ring-blue-500 font-bold text-2xl sm:text-3xl md:text-3xl lg:text-4xl resize-none"
+                        className="bg-black text-white focus:outline-none resize-none w-full font-bold text-2xl sm:text-3xl sm:leading-9 md:leading-8 md:text-4xl lg:text-4xl lg:font-semibold lg:leading-loose"
                         onChange={handleChange}
                         placeholder="Title..."
+                        rows={2}
                     />
-                </div>
-                <div className="mt-8">
+                    </div>
+                    <div className="mb-4">
                     <textarea
+                        name="content" 
+                        id="content"
                         value={blog.content}
-                        className="w-full text-white bg-black border-none outline-none text-base sm:text-lg md:text-xl lg:text-xl resize-none"
-                        onChange={handleChange}
+                        className="bg-black w-full focus:outline-none resize-none p-2 font-extralight text-[#D7D7D7] leading-8 sm:leading-8 sm:text-base md:leading-9 md:text-lg lg:text-xl lg:leading-9"
+                        onChange={(e) => handleChange(e)}
                         placeholder="Share your journey..."
+                        rows={10}
                     />
+                    </div>
+                <div className='flex justify-center mt-4'>
+                <Button 
+                text="Save" 
+                variant="primary" 
+                size="lg" onClick={handleSave} 
+                disabled={isDisabled} 
+                />
                 </div>
-                <Button text="Save" variant="primary" size="lg" onClick={handleSave} disabled={isDisabled} />
+                <ToastContainer
+                position="bottom-right"
+                />
             </main>
-        </div>
     );
 };
 
