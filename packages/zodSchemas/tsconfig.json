@@ -1,18 +1,20 @@
 {
-    "compilerOptions": {
-        "outDir": "dist",
-      "plugins": [
-        {
-          "name": "next"
-        }
-      ]
-    },
-    "include": [
-      "**/*.ts",
-      "**/*.tsx",
-      "next-env.d.ts",
-      "next.config.ts",
-      ".next/types/**/*.ts"
-    ],
-    "exclude": ["dist", "build", "node_modules"]
-  }
+  "compilerOptions": {
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    "next.config.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": ["dist", "build", "node_modules"]
+}
