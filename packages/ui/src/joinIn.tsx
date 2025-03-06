@@ -41,7 +41,7 @@ export default function JoinIn() {
                 localStorage.setItem("token", res.data.jwt);
                 toast.update(loadingToast, {
                     render: "Login successful!",
-                    onClose: () => router.push("/blogs"),
+                    onClose: () => router.push("/Blogs"),
                     autoClose: 2000,
                     type: "success",
                     isLoading: false,
