@@ -33,7 +33,7 @@ export default function JoinIn() {
         }
 
         try {
-            const res = await axios.post(`${apiUrl}/api/user/login`, { email, password }, {
+            const res = await axios.post("https://my-app.jyotimukherjeeadra86.workers.dev/api/user/login", { email, password }, {
                 headers: { "Content-Type": "application/json" },
             });
 

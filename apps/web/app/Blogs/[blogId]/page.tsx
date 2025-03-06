@@ -60,10 +60,6 @@ const Blog = () => {
         }
     }, [token, params.item]);  // ✅ Only runs when token and params.item are available
 
-    useEffect(() => {
-        console.log("Updated blog state:", blog);
-    }, [blog]); // ✅ Log when blog updates
-
     if (loading) {
         return <div className="text-white text-center">Loading...</div>;
     }
