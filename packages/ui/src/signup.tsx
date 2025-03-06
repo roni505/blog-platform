@@ -34,7 +34,7 @@ const handleClick = async (fromData: FormData) => {
     } catch (error) {
         console.error("Error:", error);
     }
-    redirect("/blogs")
+    redirect("/Blogs")
 }
 
 const SignUp = () => {
@@ -106,7 +106,7 @@ const SignUp = () => {
                     <div className="text-sm text-[#9D9D9D] text-center mt-4">
                         Already have an account? &nbsp;
                         <Link 
-                        href="/login"
+                        href="/Login"
                         className="text-[#4B9AEA] hover:text-blue-600"
                         >
                         Login

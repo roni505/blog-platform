@@ -110,7 +110,7 @@ export default function JoinIn() {
             </div>
             <div className="text-sm text-[#9D9D9D] text-center mt-4">
                 Don't have an account? &nbsp;
-                <Link href="/login" className="text-[#4B9AEA] hover:text-blue-600">Sign Up</Link>
+                <Link href="/Login" className="text-[#4B9AEA] hover:text-blue-600">Sign Up</Link>
             </div>
             <ToastContainer position="bottom-right" />
         </div>
