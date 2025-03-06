@@ -14,8 +14,7 @@ const app = new Hono<{
 app.use(
   '*',
   cors({
-    origin: "https://blog-platform-web-sdsc.vercel.app",
-    // allowHeaders: ['X-Custom-Header', 'Upgrade-Insecure-Requests'],
+    origin: "https://blog-platform-web.vercel.app",
     allowMethods: ['POST', 'GET', 'OPTIONS', 'DELETE', 'PUT'],
     allowHeaders: ["Content-Type", "Authorization", "Cookie"], // Allow specific headers
     maxAge: 600,
