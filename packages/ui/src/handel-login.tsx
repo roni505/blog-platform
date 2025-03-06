@@ -3,6 +3,8 @@
 import axios from "axios";
 import { loginValidation } from "@repo/zod-schemas/validation";
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
 export const handleLogin = async (formData: FormData) => {
     console.log("Button clicked");
 
@@ -17,7 +19,7 @@ export const handleLogin = async (formData: FormData) => {
     }
 
     try {
-        const res = await axios.post("https://my-app.jyotimukherjeeadra86.workers.dev/api/user/login", {
+        const res = await axios.post(`${apiUrl}/api/user/login`, {
             email,
             password,
         }, {
