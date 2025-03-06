@@ -2,7 +2,9 @@ import JoinIn from "@repo/ui/JoinIn";
 
 const Login = () => {
     return (
-        <JoinIn />
+        <div className="flex min-h-svh w-full items-start justify-center">
+            <JoinIn />
+        </div>
     )
 }
 

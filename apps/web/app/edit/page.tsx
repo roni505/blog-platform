@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const handelUpdate = async (id: string, title: string, content: string, router: any, setBlog: any) => {
     const token = localStorage.getItem("token");
-    const res = await axios.put("http://127.0.0.1:8787/api/blog/update-blog",
+    const res = await axios.put("https://my-app.jyotimukherjeeadra86.workers.dev/api/blog/update-blog",
         {title, content, id},
         {
             headers: {
@@ -29,6 +29,11 @@ const handelUpdate = async (id: string, title: string, content: string, router: 
 const EditBlog = () => {
     const blog = useBlogStore((state: any) => state.blog);
     const setBlog = useBlogStore((state: any) => state.setBlog)
+
+    // this fixs the build error
+    if (!blog) {
+        return <p className="text-white text-center">Loading blog data...</p>; 
+    }
     const title = blog.title;
     const content = blog.content;
     const id = blog.id

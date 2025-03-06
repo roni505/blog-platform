@@ -24,7 +24,7 @@ const handleDelete = async ({
     }
     const loadingToaster = toast.loading("Deleting blog...");
     const token = localStorage.getItem("token");
-    const res = await axios.delete(`http://127.0.0.1:8787/api/blog/delete?id=${postID}`,
+    const res = await axios.delete(`https://my-app.jyotimukherjeeadra86.workers.dev/api/blog/delete?id=${postID}`,
         {
             headers: {
                 "Content-Type" : "application/json",

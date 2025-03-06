@@ -4,7 +4,7 @@ import Link from "next/link";
 import Blog from "./blog";
 
 const fetchBlogs = async () => {
-    const res = await axios.get("http://127.0.0.1:8787/api/blog/all-blogs");
+    const res = await axios.get("https://my-app.jyotimukherjeeadra86.workers.dev/api/blog/all-blogs");
     const data = Object.values(res.data.blogs) as CreateBlog[];
     return data;
 };

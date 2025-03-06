@@ -1,7 +1,6 @@
 "use server";
 
 import axios from "axios";
-import { redirect } from "next/navigation";
 import { loginValidation } from "@repo/zod-schemas/validation";
 
 export const handleLogin = async (formData: FormData) => {
@@ -18,14 +17,13 @@ export const handleLogin = async (formData: FormData) => {
     }
 
     try {
-        const res = await axios.post("http://127.0.0.1:8787/api/user/login", {
+        const res = await axios.post("https://my-app.jyotimukherjeeadra86.workers.dev/api/user/login", {
             email,
             password,
         }, {
             headers: {
                 "Content-Type": "application/json",
             },
-            withCredentials: true, // Ensures cookies are sent for authentication
         });
 
         if (res.status === 200 && res.data.success) {

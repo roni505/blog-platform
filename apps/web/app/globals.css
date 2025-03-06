@@ -90,3 +90,12 @@ body {
  }
 }
 
+@layer utilities {
+  input:-webkit-autofill {
+    background-color: black !important;
+    color: white !important;
+    -webkit-text-fill-color: white !important; 
+    -webkit-box-shadow: 0 0 0px 1000px #051c0f inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}

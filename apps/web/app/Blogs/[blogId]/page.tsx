@@ -38,7 +38,7 @@ const Blog = () => {
             try {
                 // console.log("Control is here");
                 
-                const res = await axios.get(`http://127.0.0.1:8787/api/blog/givenID/${blogID}`, {
+                const res = await axios.get(`https://my-app.jyotimukherjeeadra86.workers.dev/api/blog/givenID/${blogID}`, {
                     headers: { "Authorization": token },
                     // withCredentials: true,
                 });

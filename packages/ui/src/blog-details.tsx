@@ -2,7 +2,7 @@ import axios from "axios";
 
 const fetchBlog = async (slug: string) => {
     try {
-        const res = await axios.get(`http://127.0.0.1:8787/api/blog/${slug}`);
+        const res = await axios.get(`https://my-app.jyotimukherjeeadra86.workers.dev/api/blog/${slug}`);
         return res.data; // Ensure this matches the expected format
     } catch (error) {
         console.error("Error fetching blog:", error);

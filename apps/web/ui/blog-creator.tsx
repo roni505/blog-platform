@@ -31,12 +31,11 @@ const BlogCreator = () => {
         console.log("Saving blog:", blog);
 
         const title = blog.title;
-        // router.push(`/your-blog/${encodeURIComponent(title)}`);
 
         setTimeout(async () => {
             try {
                 const token = localStorage.getItem("token");
-                const res = await axios.post("http://127.0.0.1:8787/api/blog/create-blog", blog, {
+                const res = await axios.post("https://my-app.jyotimukherjeeadra86.workers.dev/api/blog/create-blog", blog, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": token,

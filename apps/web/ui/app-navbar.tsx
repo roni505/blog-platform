@@ -15,10 +15,12 @@ const AppNavBar = () => {
     }
     return (
         <nav className="text-white flex justify-between max-w-7xl p-6 mx-auto items-center">
-            <Link href="/">
-                <h1 className={`${jainiPurva.className} text-3xl md:text-4xl lg:text-5xl text-white`}>Vaani</h1>
-            </Link>
-            {pathName !== "/create-blog" && (
+            {pathName !== "/" && (
+                <Link href="/">
+                    <h1 className={`${jainiPurva.className} text-3xl md:text-4xl lg:text-5xl text-white`}>Vaani</h1>
+                </Link>
+            )}
+            {!["/","/create-blog", "/login", "/create-account"].includes(pathName) && (
                 <Link href="/create-blog">
                     <Button text="Create New Blog" variant="primary" size="lg" />
                 </Link>

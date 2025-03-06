@@ -5,6 +5,7 @@ type ButtonProps = {
     size?: "sm" | "md" | "lg";
     type?: "submit" | "reset" | "button";
     disabled?: boolean;
+    className?: string;
 };
 
 const variantStyle = {
@@ -22,10 +23,11 @@ const Button = ({
     onClick,
     type,
     disabled = false,
+    className
 }: ButtonProps) => {
     return (
         <button
-            className={`${responsiveSize} ${variantStyle[variant]} ${
+            className={` ${className} ${responsiveSize} ${variantStyle[variant]} ${
                 disabled ? disabledStyle : ""
             }`}
             onClick={!disabled ? onClick : undefined}
