@@ -22,6 +22,14 @@ app.use(
   })
 )
 
+app.options('*', (c) => {
+  c.header('Access-Control-Allow-Origin', 'https://blog-platform-web.vercel.app')
+  c.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+  c.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Cookie')
+  c.header('Access-Control-Allow-Credentials', 'true')
+  return c.text('OK', 200)
+})
+
 app.route('api/user', userRounter)
 app.route('api/blog', blogRounter)
 
