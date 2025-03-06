@@ -8,7 +8,7 @@ const Hero = () => {
                 Write, Inspire, and Connect with the World
             </h1>
             <div className="flex justify-center mt-4">
-                <Link href="/blogs">
+                <Link href="/Blogs">
                     <Button text="Start reading" variant="secondary" size="lg" />
                 </Link>
             </div>

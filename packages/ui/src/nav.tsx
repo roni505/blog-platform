@@ -26,7 +26,7 @@ const Nav = () => {
                 </Link>
             </div>
             <div className="flex justify-between space-x-4">
-                <Button text="Login" variant="secondary" onClick={() => router.push("/login")} />
+                <Button text="Login" variant="secondary" onClick={() => router.push("/Login")} />
                 <Button text="Get-Started" variant="primary" onClick={() => router.push("/create-account")} />
             </div>
         </nav>
