@@ -14,7 +14,7 @@ const app = new Hono<{
 app.use(
   '*',
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://blog-platform-web-sdsc.vercel.app/",
     // allowHeaders: ['X-Custom-Header', 'Upgrade-Insecure-Requests'],
     allowMethods: ['POST', 'GET', 'OPTIONS', 'DELETE', 'PUT'],
     allowHeaders: ["Content-Type", "Authorization", "Cookie"], // Allow specific headers
