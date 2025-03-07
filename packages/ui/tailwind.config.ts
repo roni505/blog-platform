@@ -14,7 +14,8 @@ const config: Pick<Config, "presets" | "content" | "theme"> = {
         dark: "#1F1F1F",
         strokeColor: "#494949",
         chipBg: "#111111",
-        hrColor: "#383838"
+        hrColor: "#383838",
+        navBorder: "#2D2D2D"
       }
     }
   }

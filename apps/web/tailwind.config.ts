@@ -20,7 +20,8 @@ const config: Pick<Config, "presets" | "content" | "theme" | "darkMode" | "plugi
   			dark: '#1F1F1F',
   			strokeColor: '#494949',
   			chipBg: '#111111',
-  			hrColor: '#383838',
+  			hrColor: '#000000',
+			navBorder: "",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

@@ -8,8 +8,6 @@ import Button from "./button";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
 export default function JoinIn() {
     const router = useRouter();
     const [email, setEmail] = useState("");

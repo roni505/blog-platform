@@ -42,7 +42,7 @@ const handleDelete = async ({
             type: "success",
             isLoading: false,
             autoClose: 2000,
-            onClose: () => router.push("/blogs")
+            onClose: () => router.push("/Blogs")
         })
     } else {
         toast.error("Error deleting post");
@@ -55,64 +55,33 @@ const PublishedNavBar = ({
 }: Props) => {
     const notify = () => toast.success("Wow so easy");
     console.log("From notify", notify);
-    const pathName = usePathname();
     const router = useRouter();
     return (
-        <nav className="text-white flex justify-between max-w-7xl p-6 mx-auto items-center">
+        <>
+        <nav className="text-white flex justify-between max-w-7xl mx-auto items-center p-4">
             <Link href="/">
                 <h1 className={`${jainiPurva.className} text-3xl md:text-4xl lg:text-5xl text-white`}>Vaani</h1>
             </Link>
-            <div className="">
+            <div className="space-x-4">
                 <Button 
                 text="Delete" 
-                variant="primary" 
+                variant="delete" 
                 size="lg"
-                onClick={() => postID ? handleDelete({ postID, deleteBlog, router}) : console.error("ID is missing")}  
+                onClick={() => postID ? handleDelete({ postID, deleteBlog, router}) : console.error("ID is missing")} 
                 />
                 <Button 
                 text="Edit" 
                 variant="primary" 
                 onClick={() => router.push("/edit")}
                 />
-                <Button text="Notify" variant="primary" onClick={notify} ></Button>
                 <ToastContainer 
                 position="bottom-right"
                 />
             </div>
         </nav>
+        <hr className="border-hrColor"/>
+        </>
     )
 }
 
 export default PublishedNavBar;
-
-
-// 'use client'
-
-// import Button from "@repo/ui/button";
-// import Link from "next/link";
-// import { Jaini_Purva } from "next/font/google";
-// import { usePathname } from "next/navigation";
-
-// const jainiPurva = Jaini_Purva({ subsets: ["latin"], weight: "400" })
-
-// const AppNavBar = () => {
-//     const pathName = usePathname();
-
-//     if (pathName.startsWith("/your-blog")) {
-//         return null;
-//     }
-//     return (
-        // <nav className="text-white flex justify-between max-w-7xl p-6 mx-auto items-center">
-        //     <Link href="/">
-        //         <h1 className={`${jainiPurva.className} text-3xl md:text-4xl lg:text-5xl text-white`}>Vaani</h1>
-        //     </Link>
-        //     {pathName !== "/create-blog" && (
-        //         <Link href="/create-blog">
-        //             <Button text="Create New Blog" variant="primary" size="lg" />
-        //         </Link>
-        //     )}
-        // </nav>
-//     )
-// }
-
-// export default AppNavBar;
