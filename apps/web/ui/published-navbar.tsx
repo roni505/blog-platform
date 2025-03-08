@@ -1,17 +1,12 @@
 'use client'
 
 import Button from "@repo/ui/button";
-import Link from "next/link";
-import { Jaini_Purva } from "next/font/google";
-import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { Props } from "./published-blog";
 import axios from "axios"; 
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
-
-const jainiPurva = Jaini_Purva({ subsets: ["latin"], weight: "400" })
+import Logo from "@repo/ui/logo";
 
 const handleDelete = async ({ 
     postID, 
@@ -59,9 +54,7 @@ const PublishedNavBar = ({
     return (
         <>
         <nav className="text-white flex justify-between max-w-7xl mx-auto items-center p-4">
-            <Link href="/">
-                <h1 className={`${jainiPurva.className} text-3xl md:text-4xl lg:text-5xl text-white`}>Vaani</h1>
-            </Link>
+            <Logo />
             <div className="space-x-4">
                 <Button 
                 text="Delete" 

@@ -8,6 +8,7 @@
     "dist"
   ],
   "exports": {
+    "./logo": "./src/logo.tsx",
     "./appNavbar": "./src/app-navbar.tsx",
     "./blog-input": "./src/blog-input.tsx",
     "./input": "./src/input.tsx",

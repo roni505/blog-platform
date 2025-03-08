@@ -1,6 +1,5 @@
 import Button from "@repo/ui/button";
 import Link from "next/link";
-import { Jaini_Purva } from "next/font/google";
 import { useRouter } from "next/navigation";
 import axios from "axios"; 
 import React from 'react';
@@ -8,8 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { EditNavbarProps } from "app/edit/page";
 import { useBlogStore } from "stores/store-provider";
-
-const jainiPurva = Jaini_Purva({ subsets: ["latin"], weight: "400" })
+import Logo from "@repo/ui/logo";
 
 const handelUpdate = async (id: string, title: string, content: string, router: any, setBlog: any) => {
     const loadingTost = toast.loading("Saving changes... Almost done!")
@@ -52,9 +50,7 @@ const EditNavbar = ({ id, title, content }: EditNavbarProps) => {
     return (
         <>
         <nav className="text-white flex justify-between max-w-7xl mx-auto items-center p-4">
-            <Link href="/">
-                <h1 className={`${jainiPurva.className} text-3xl md:text-4xl lg:text-5xl text-white`}>Vaani</h1>
-            </Link>
+            <Logo />
             <div className="space-x-4">
                 <Button 
                 text="Save and Publish" 

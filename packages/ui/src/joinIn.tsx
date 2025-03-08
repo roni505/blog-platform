@@ -59,7 +59,7 @@ export default function JoinIn() {
     };
 
     return (
-        <div className="text-white border-[#424242] border rounded-3xl p-7 max-w-md w-full">
+        <div className="text-white border-[#424242] border rounded-3xl p-7 max-w-md w-full mt-5 sm:mt-6 mg:mt-8 lg:mt-8">
             <h2 className="text-3xl w-full text-center mb-8 text-[#ACACAC]">Login</h2>
             <div className="grid gap-2 w-full pb-6">
                 <label htmlFor="email" className="text-base">Email</label>
@@ -108,7 +108,7 @@ export default function JoinIn() {
             </div>
             <div className="text-sm text-[#9D9D9D] text-center mt-4">
                 Don't have an account? &nbsp;
-                <Link href="/Login" className="text-[#4B9AEA] hover:text-blue-600">Sign Up</Link>
+                <Link href="/create-account" className="text-[#4B9AEA] hover:text-blue-600">Sign Up</Link>
             </div>
             <ToastContainer position="bottom-right" />
         </div>

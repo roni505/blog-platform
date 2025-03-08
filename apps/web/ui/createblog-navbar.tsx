@@ -1,20 +1,15 @@
 import { CreateBlogNavbarProps } from "./blog-creator";
-import Link from "next/link";
 import Button from "@repo/ui/button";
-import { Jaini_Purva } from "next/font/google";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useRouter } from "next/navigation";
 import { useBlogStore } from "stores/store-provider";
 import { BlogState } from "stores/blog-store";
-
-const jainiPurva = Jaini_Purva({ subsets: ["latin"], weight: "400" })
+import Logo from "@repo/ui/logo";
 
 const handleSave = async (blog: CreateBlogNavbarProps["blog"], router: AppRouterInstance, setBlog: BlogState["setBlog"]) => {
     const loadingToast = toast.loading("Adding blog..")
-    // setBlogState(blog);
-    console.log("Saving blog:", blog);
 
     const title = blog.title
 
@@ -56,9 +51,7 @@ const CreateBlogNavbar = ({ blog }: CreateBlogNavbarProps) => {
     return (
         <>
         <nav className="text-white flex justify-between max-w-7xl mx-auto items-center p-4">
-            <Link href="/">
-                <h1 className={`${jainiPurva.className} text-3xl md:text-4xl lg:text-5xl text-white`}>Vaani</h1>
-            </Link>
+            <Logo />
             <div className="space-x-4">
                 <Button 
                 text="Save" 

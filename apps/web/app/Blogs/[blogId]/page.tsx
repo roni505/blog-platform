@@ -66,7 +66,7 @@ const Blog = () => {
 
     return (
         <>
-        <div className="flex flex-col px-5 sm:p-0 sm:max-w-2xl text-white items-start mx-auto">
+        <div className="flex flex-col px-5 sm:p-0 sm:max-w-2xl text-white items-start mx-auto  mt-5 sm:mt-6 mg:mt-8 lg:mt-8">
             <h1 className="text-2xl sm:text-3xl sm:leading-9 md:leading-8 md:text-4xl lg:text-4xl lg:font-semibold lg:leading-loose">
                 {blog?.title}
             </h1>

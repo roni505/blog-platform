@@ -39,7 +39,7 @@ const handleClick = async (fromData: FormData) => {
 
 const SignUp = () => {
     return (
-        <div className="text-white border-[#424242] border rounded-3xl p-7 max-w-md w-full">
+        <div className="text-white border-[#424242] border rounded-3xl p-7 max-w-md w-full mt-5 sm:mt-6 mg:mt-8 lg:mt-8">
                     <h2 className="text-3xl w-full text-center mb-8 text-[#ACACAC]">
                         Create Account
                     </h2>
