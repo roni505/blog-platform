@@ -13,7 +13,7 @@ const AppNavBar = () => {
     }
     return (
         <>
-        <nav className="flex justify-between max-w-7xl mx-auto items-center p-4 ">
+        <nav className="flex justify-between max-w-7xl mx-auto items-center p-4 mt-4">
             {pathName !== "/" && (
                 <Logo />
             )}
@@ -23,7 +23,7 @@ const AppNavBar = () => {
                 </Link>
             )}
         </nav>
-        <hr className="border-hrColor"/>
+        <hr className="border-hrColor mt-4"/>
         </>
     )
 }
