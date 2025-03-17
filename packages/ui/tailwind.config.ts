@@ -6,6 +6,9 @@ const config: Pick<Config, "presets" | "content" | "theme"> = {
   presets: [sharedConfig], // Keep shared config
   theme: {
     extend: {
+      backgroundImage: {
+        'text-gradient': 'linear-gradient(to right, #FFFFFF 0%, #999999 100%)',
+      },
       fontFamily: {
         serif: ["Source Serif 4", "serif"],
       },

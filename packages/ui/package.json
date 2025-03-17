@@ -17,7 +17,7 @@
     "./allblogs": "./src/allBlogs.tsx",
     "./JoinIn": "./src/joinIn.tsx",
     "./signup": "./src/signup.tsx",
-    "./stack": "./src/stack.tsx",
+    "./tech-stack": "./src/tech-stack.tsx",
     "./hero": "./src/hero.tsx",
     "./footer": "./src/footer.tsx",
     "./subscription": "./src/subscription.tsx",
