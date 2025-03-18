@@ -8,7 +8,7 @@ type CardInput = {
     date: string;
 };
 
-const card = ({ src, genre, title, author, date }: CardInput) => {
+const Card = ({ src, genre, title, author, date }: CardInput) => {
     return (
         <div className="relative w-[400px] h-[500px] rounded-md overflow-hidden shadow-xl bg-black text-white">
             {/* Background Image using Next.js Image */}
@@ -37,4 +37,4 @@ const card = ({ src, genre, title, author, date }: CardInput) => {
     );
 };
 
-export default card;
+export default Card;

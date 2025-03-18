@@ -51,7 +51,7 @@ const EditNavbar = ({ id, title, content }: EditNavbarProps) => {
         <>
         <nav className="text-white flex justify-between max-w-7xl mx-auto items-center mt-4">
             <Logo />
-            <div className="space-x-4">
+            <div className="gap-4">
                 <Button 
                 text="Save and Publish" 
                 variant="primary" 
