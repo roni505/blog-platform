@@ -3,7 +3,7 @@ import StackSection from "./stack-section";
 
 const TechStack = () => {
     return (
-        <div className="px-5 flex justify-center items-center flex-col border border-[#3F3418] sm:p-0 sm:max-w-2xl md:max-w-7xl mx-auto rounded-2xl mt-20 mb-20 shadow-[inset_0_0_250px_#3F3418]">
+        <div className="px-5 flex justify-center items-center flex-col border border-[#3F3418] sm:p-0 sm:max-w-2xl md:max-w-7xl mx-auto rounded-2xl mt-20 mb-20 shadow-[inset_0_0_100px_#3F3418]">
             <StackSection title="Frontend">
                 <StackCard 
                 src="/images/logo/skill-icons_nextjs-light.svg"
