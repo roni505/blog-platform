@@ -16,7 +16,7 @@ const Logout = () => {
         render: "Logged out successfully!",
         type: "success",
         isLoading: false,
-        autoClose: 2000,
+        autoClose: 1500,
         onClose: () => router.push("/")
       });
     }, 2000);
@@ -32,7 +32,7 @@ const Logout = () => {
         strokeWidth={2}
         />
         </button>
-        <ToastContainer position="bottom-right"/>
+        <ToastContainer position="top-center"/>
     </div>
   );
 };
