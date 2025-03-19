@@ -17,11 +17,8 @@ const Blog = () => {
     
     
     const setBlog = useBlogStore((state: BlogState) => state.setBlog);
-    // const blogDetails = blogStore((state: any) => state.blogDetails) as any
     // console.log(blogDetails);
-    
-    // const [blog, setBlog] = useState<{ title: string; content: string } | null>(null);
-    const [loading, setLoading] = useState(true);
+        const [loading, setLoading] = useState(true);
     const [token, setToken] = useState<string | null>(null); // Store token in state
     
     useEffect(() => {
@@ -35,19 +32,12 @@ const Blog = () => {
     
     useEffect(() => {
         const fetchBlog = async () => {
-            try {
-                // console.log("Control is here");
-                
+            try {                
                 const res = await axios.get(`https://my-app.jyotimukherjeeadra86.workers.dev/api/blog/givenID/${blogID}`, {
                     headers: { "Authorization": token },
-                    // withCredentials: true,
                 });
                 setBlog(res.data.post);
-                console.log(res.data.post);
-                
-                // console.log(res.data.post);
-                // console.log("From blog state: ", blog);
-                
+                console.log(res.data.post);                
             } catch (error) {
                 console.error("Error fetching blog:", error);
             } finally {
@@ -58,11 +48,7 @@ const Blog = () => {
         if (token) {
             fetchBlog();
         }
-    }, [token, params.item]);  // ✅ Only runs when token and params.item are available
-
-    if (loading) {
-        return <div className="text-white text-center">Loading...</div>;
-    }
+    }, [token, params.item]);
 
     return (
         <>

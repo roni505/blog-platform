@@ -9,7 +9,7 @@ Vaani is a blogging platform designed with a user-friendly experience.
 - Create, delete, edit, and manage your blogs effortlessly.
 - Fast loading & mobile responsiveness
 - SEO-friendly 
-- User authentication (Sign up, Login, Logout)
+- User authentication (Sign up, Login)
 
 **Teck Stack** :- 
 ---
