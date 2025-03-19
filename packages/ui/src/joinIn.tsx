@@ -102,7 +102,7 @@ export default function JoinIn() {
                     className="text-sm text-[#4B9AEA] w-full"
                     onClick={() => {
                         setEmail("guest@gmail.com");
-                        setPassword("1234");
+                        setPassword("123456");
                         setTimeout(handleLogin, 100); // Ensure state updates before login
                     }}
                 />
