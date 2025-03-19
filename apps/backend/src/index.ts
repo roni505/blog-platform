@@ -5,6 +5,8 @@ import { cors } from 'hono/cors'
 
 const app = new Hono<{
   Bindings: {
+    DEVELOPMENT_URL: string,
+    FRONTEND_URL: string,
     DATABASE_URL: string,
     JWT_SECRET: string
   }
@@ -13,14 +15,19 @@ const app = new Hono<{
 // CORS middleware
 app.use(
   '*',
-  cors({
-    origin: ["https://blog-platform-web.vercel.app", "http://localhost:3000"],
-    allowMethods: ['POST', 'GET', 'OPTIONS', 'DELETE', 'PUT'],
-    allowHeaders: ["Content-Type", "Authorization", "Cookie"], // Allow specific headers
-    maxAge: 600,
-    credentials: true,
-  })
-)
+  async (c, next) => {
+    const frontendUrl = c.env.FRONTEND_URL;
+    const developementUrl = c.env.DEVELOPMENT_URL;
+
+    cors({
+      origin: [frontendUrl, developementUrl],
+      allowMethods: ['POST', 'GET', 'OPTIONS', 'DELETE', 'PUT'],
+      allowHeaders: ["Content-Type", "Authorization", "Cookie"],
+      maxAge: 600,
+      credentials: true,
+    })(c, next);
+  }
+);
 
 app.route('api/user', userRounter)
 app.route('api/blog', blogRounter)

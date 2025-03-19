@@ -21,7 +21,7 @@ const Subscription = () => {
                 placeholder="Your email address"
                 />
                 <Button 
-                text="Get-started" 
+                text="Get Notified" 
                 variant="primary" 
                 size="lg" 
                 onClick={() => router.push("/")} 

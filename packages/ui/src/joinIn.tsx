@@ -101,8 +101,9 @@ export default function JoinIn() {
                     type="button"
                     className="text-sm text-[#4B9AEA] w-full"
                     onClick={() => {
-                        setEmail("guest@example.com");
-                        setPassword("guest1234");
+                        setEmail("guest@gmail.com");
+                        setPassword("1234");
+                        setTimeout(handleLogin, 100); // Ensure state updates before login
                     }}
                 />
             </div>

@@ -15,7 +15,7 @@ const Nav = () => {
         <nav className="max-w-7xl mx-auto flex justify-between items-center p-5">
             <Logo />
             <div className="hidden sm:flex justify-between items-center gap-12 text-stone-300 mt-2">
-                <Link to="Stack" smooth={true} duration={500} role="button" className="hover:text-gray-500 transition-all duration-300">
+                <Link to="Tech Behind It" smooth={true} duration={500} role="button" className="hover:text-gray-500 transition-all duration-300">
                     Tech Behind It
                 </Link>
                 <Link to="Subscribe" smooth={true} duration={500} role="button" className="hover:text-gray-500 transition-all duration-300">

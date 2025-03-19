@@ -49,7 +49,7 @@ const EditNavbar = ({ id, title, content }: EditNavbarProps) => {
     
     return (
         <>
-        <nav className="text-white flex justify-between max-w-7xl mx-auto items-center mt-4">
+        <nav className="text-white flex justify-between max-w-7xl mx-auto items-center p-5">
             <Logo />
             <div className="gap-4">
                 <Button 
@@ -63,7 +63,7 @@ const EditNavbar = ({ id, title, content }: EditNavbarProps) => {
                 />
             </div>
         </nav>
-        <hr className="border-hrColor mt-4"/>
+        <hr className="border-hrColor"/>
         </>
     )
 }

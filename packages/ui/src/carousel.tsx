@@ -49,11 +49,13 @@ const cardDataInput: CardInput[] = [
 const Carousel = () => {
   return (
     <div className="relative mt-20 overflow-hidden w-full">
+      <div className="absolute z-10 left-0 top-0 bg-gradient-to-r from-black via-black/60 to-transparent h-full w-32"></div>
       <div className="flex gap-12 animate-scroll">
       {[...cardDataInput, ...cardDataInput].map((cardData, index) => (
           <Card key={index} {...cardData} />
         ))}
       </div>
+      <div className="absolute z-10 right-0 top-0 bg-gradient-to-l from-black via-black/60 to-transparent h-full w-32"></div>
     </div>
   );
 };

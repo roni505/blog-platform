@@ -3,7 +3,9 @@ import StackSection from "./stack-section";
 
 const TechStack = () => {
     return (
-        <div className="px-5 flex justify-center items-center flex-col border border-[#3F3418] sm:p-0 sm:max-w-2xl md:max-w-7xl mx-auto rounded-2xl mt-20 mb-20 shadow-[inset_0_0_100px_#3F3418]">
+        <div 
+        id="Tech Behind It" 
+        className="px-5 flex justify-center items-center flex-col border border-[#232323] max-w-7xl mx-auto rounded-2xl mt-20 mb-20 shadow-[inset_0_30px_120px_#4A4A4A]">
             <StackSection title="Frontend">
                 <StackCard 
                 src="/images/logo/skill-icons_nextjs-light.svg"
@@ -31,7 +33,7 @@ const TechStack = () => {
                 alt="Logo of zod"
                 />
             </StackSection>
-            <hr className="w-full border-t border-[#221C0E] my-6" />
+            <hr className="w-full border-t border-[#232323] my-6" />
             <StackSection title="Backend">
                 <StackCard 
                 src="/images/logo/logos_hono.svg"
@@ -49,7 +51,7 @@ const TechStack = () => {
                 alt="Logo of typescript"
                 />
             </StackSection>
-            <hr className="w-full border-t border-[#221C0E] my-6" />
+            <hr className="w-full border-t border-[#232323] my-6" />
             <StackSection title="Deployment">
                 <StackCard 
                 src="/images/logo/devicon_cloudflareworkers.svg"
