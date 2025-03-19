@@ -17,8 +17,11 @@ const Blog = () => {
     
     
     const setBlog = useBlogStore((state: BlogState) => state.setBlog);
+    // const blogDetails = blogStore((state: any) => state.blogDetails) as any
     // console.log(blogDetails);
-        const [loading, setLoading] = useState(true);
+    
+    // const [blog, setBlog] = useState<{ title: string; content: string } | null>(null);
+    const [loading, setLoading] = useState(true);
     const [token, setToken] = useState<string | null>(null); // Store token in state
     
     useEffect(() => {
@@ -32,12 +35,18 @@ const Blog = () => {
     
     useEffect(() => {
         const fetchBlog = async () => {
-            try {                
+            try {
+                // console.log("Control is here");
+                
                 const res = await axios.get(`https://my-app.jyotimukherjeeadra86.workers.dev/api/blog/givenID/${blogID}`, {
                     headers: { "Authorization": token },
                 });
                 setBlog(res.data.post);
-                console.log(res.data.post);                
+                console.log(res.data.post);
+                
+                // console.log(res.data.post);
+                // console.log("From blog state: ", blog);
+                
             } catch (error) {
                 console.error("Error fetching blog:", error);
             } finally {
@@ -49,6 +58,46 @@ const Blog = () => {
             fetchBlog();
         }
     }, [token, params.item]);
+
+    if (loading) {
+        return (
+            <div className="flex justify-center h-screen bg-black mt-8">
+              <div className="loader relative flex space-x-2">
+                <div className="dot"></div>
+                <div className="dot"></div>
+                <div className="dot"></div>
+                <style>
+                  {`
+                    .dot {
+                      width: 8px;
+                      height: 8px;
+                      background-color: #007bff; /* Standard Blue */
+                      border-radius: 50%;
+                      animation: bounce 1.4s infinite ease-in-out both;
+                    }
+        
+                    .dot:nth-child(1) {
+                      animation-delay: -0.32s;
+                    }
+        
+                    .dot:nth-child(2) {
+                      animation-delay: -0.16s;
+                    }
+        
+                    .dot:nth-child(3) {
+                      animation-delay: 0s;
+                    }
+        
+                    @keyframes bounce {
+                      0%, 80%, 100% { transform: scale(0.5); opacity: 0.3; }
+                      40% { transform: scale(1.2); opacity: 1; }
+                    }
+                  `}
+                </style>
+              </div>
+            </div>
+          );
+    }
 
     return (
         <>
