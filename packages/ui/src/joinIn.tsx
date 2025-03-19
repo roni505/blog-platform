@@ -9,7 +9,7 @@ import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import { useEffect } from "react";
 
-export default function JoinIn() {
+const JoinIn = () => {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -125,3 +125,5 @@ export default function JoinIn() {
         </div>
     );
 }
+
+export default JoinIn;
