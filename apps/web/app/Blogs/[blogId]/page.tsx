@@ -17,10 +17,8 @@ const Blog = () => {
     
     
     const setBlog = useBlogStore((state: BlogState) => state.setBlog);
-    // const blogDetails = blogStore((state: any) => state.blogDetails) as any
     // console.log(blogDetails);
     
-    // const [blog, setBlog] = useState<{ title: string; content: string } | null>(null);
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState<string | null>(null); // Store token in state
     

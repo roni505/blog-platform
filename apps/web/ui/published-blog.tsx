@@ -3,9 +3,7 @@
 import { BlogState } from "../stores/blog-store";
 import { useBlogStore } from "../stores/store-provider";
 import { format } from "date-fns"
-import Button from "@repo/ui/button";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import PublishedNavBar from "./published-navbar";
 
