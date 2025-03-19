@@ -7,12 +7,22 @@ import { loginValidation } from "@repo/zod-schemas/validation";
 import Button from "./button";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
+import { useEffect } from "react";
 
 export default function JoinIn() {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const [guestLogin, setGuestLogin] = useState(false);
+
+    useEffect(() => {
+        if (guestLogin) {
+            handleLogin();
+            setGuestLogin(false);
+        }
+    }, [guestLogin, email, password]);
+
 
     const handleLogin = async () => {
         setLoading(true);
@@ -103,7 +113,7 @@ export default function JoinIn() {
                     onClick={() => {
                         setEmail("guest@gmail.com");
                         setPassword("123456");
-                        setTimeout(handleLogin, 100); // Ensure state updates before login
+                        setGuestLogin(true)
                     }}
                 />
             </div>
