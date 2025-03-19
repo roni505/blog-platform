@@ -4,7 +4,11 @@ import Link from "next/link";
 import Blog from "./blog";
 
 const fetchBlogs = async () => {
-    const res = await axios.get("https://my-app.jyotimukherjeeadra86.workers.dev/api/blog/all-blogs");
+    const res = await axios.get("https://my-app.jyotimukherjeeadra86.workers.dev/api/blog/all-blogs",{
+        headers: {
+            "Cache-Control": "no-store"
+        }
+    });
     const data = Object.values(res.data.blogs) as CreateBlog[];
     return data;
 };

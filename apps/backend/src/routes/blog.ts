@@ -242,6 +242,7 @@ blogRounter.get('/all-blogs', async (c) => {
         }
       }
     })
+    
     return c.json({
       message: "This are all the blogs",
       blogs: allBlogs,
