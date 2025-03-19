@@ -41,7 +41,7 @@ const PublishedBlog = () => {
                 </div>
             </div>
             <hr className="mt-5 sm:mt-7 md:mt-8 lg:mt-9 border-hrColor w-full"/>
-            <div className="py-5 sm:py-6 md:py-8 lg:py-9">
+            <div className="py-5 sm:py-6 md:py-8 lg:py-9 mt-6">
                 <p className="font-extralight text-[#D7D7D7] leading-8 sm:leading-8 sm:text-base md:leading-9 md:text-lg lg:text-xl lg:leading-9">
                     {blog?.content}
                 </p>

@@ -42,6 +42,7 @@ userRounter.post('/sign-in', async (c) => {
     });
   } catch (error) {
     console.error("Cannot sign-in users", error);
+    return c.json({ error: "Error signing in user"}, 500);
   } finally {
     prisma.$disconnect();
   }

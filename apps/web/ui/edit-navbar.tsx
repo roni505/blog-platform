@@ -1,5 +1,4 @@
 import Button from "@repo/ui/button";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios"; 
 import React from 'react';
@@ -8,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { EditNavbarProps } from "app/edit/page";
 import { useBlogStore } from "stores/store-provider";
 import Logo from "@repo/ui/logo";
+import Logout from "./logout";
 
 const handelUpdate = async (id: string, title: string, content: string, router: any, setBlog: any) => {
     const loadingTost = toast.loading("Saving changes... Almost done!")
@@ -51,13 +51,14 @@ const EditNavbar = ({ id, title, content }: EditNavbarProps) => {
         <>
         <nav className="text-white flex justify-between max-w-7xl mx-auto items-center p-5">
             <Logo />
-            <div className="gap-4">
+            <div className="flex items-center gap-4">
                 <Button 
                 text="Save and Publish" 
                 variant="primary" 
                 size="lg"
                 onClick={() => handelUpdate(id, title, content, router, setBlog)} 
                 />
+                <Logout /> 
                 <ToastContainer 
                 position="bottom-right"
                 />

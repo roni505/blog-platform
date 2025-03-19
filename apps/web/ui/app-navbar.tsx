@@ -4,6 +4,7 @@ import Button from "@repo/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "@repo/ui/logo";
+import Logout from "./logout";
 
 const AppNavBar = () => {
     const pathName = usePathname();
@@ -18,9 +19,12 @@ const AppNavBar = () => {
                 <Logo />
             )}
             {!["/", "/Login", "/create-account"].includes(pathName) && (
-                <Link href="/create-blog">
-                    <Button text="Create New Blog" variant="primary" size="lg" />
-                </Link>
+                <div className="flex items-center gap-4">
+                    <Link href="/create-blog">
+                        <Button text="Create New Blog" variant="primary" size="lg" />
+                    </Link>
+                    <Logout />
+                </div>
             )}
         </nav>
         <hr className="border-hrColor"/>

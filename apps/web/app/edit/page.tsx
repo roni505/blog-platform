@@ -35,7 +35,7 @@ const EditBlog = () => {
         <main className="w-full max-w-2x">
             <div className="mb-4">
                 <textarea 
-                className="overflow-hidden bg-black text-white focus:outline-none resize-none w-full font-bold text-2xl sm:text-3xl sm:leading-9 md:leading-8 md:text-4xl lg:text-4xl lg:font-semibold lg:leading-loose"
+                className="overflow-hidden bg-black text-white focus:outline-none resize-none w-full font-bold text-2xl sm:text-3xl sm:leading-9 md:leading-8 md:text-4xl lg:text-4xl lg:font-semibold lg:leading-loose p-2"
                 value={initTitle}
                 onChange={(e) => setInitTitle(e.target.value)}
                 rows={2}

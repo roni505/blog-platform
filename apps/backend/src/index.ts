@@ -15,18 +15,13 @@ const app = new Hono<{
 // CORS middleware
 app.use(
   '*',
-  async (c, next) => {
-    const frontendUrl = c.env.FRONTEND_URL;
-    const developementUrl = c.env.DEVELOPMENT_URL;
-
     cors({
-      origin: [frontendUrl, developementUrl],
+      origin: ["https://blog-platform-web.vercel.app", "http://localhost:3000"],
       allowMethods: ['POST', 'GET', 'OPTIONS', 'DELETE', 'PUT'],
       allowHeaders: ["Content-Type", "Authorization", "Cookie"],
       maxAge: 600,
       credentials: true,
-    })(c, next);
-  }
+    })
 );
 
 app.route('api/user', userRounter)

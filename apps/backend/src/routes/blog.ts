@@ -29,6 +29,7 @@ blogRounter.use('/*', async(c, next) => {
       return c.json({ message: "Authorization token missing" }, 401);
   }
     const res =  await verify(token, c.env.JWT_SECRET) as JwtPayload; //making sure res is a string type
+    console.log("Decoded JWT:", res);
 
   if (!res.id) {
       return c.json({ message: "ID is missing in JWT", res }, 403);
@@ -50,7 +51,7 @@ blogRounter.post('/create-blog', async (c) => {
     datasourceUrl: c.env.DATABASE_URL
   }).$extends(withAccelerate())
 
-  try {
+  try {    
     const body = await c.req.json();
     const validate = createBlog.safeParse(body);
     if (!validate.success) {
@@ -59,7 +60,19 @@ blogRounter.post('/create-blog', async (c) => {
         message: "User Input is incorrect"
       })
     }
-    const userID = c.get("UserID")
+    const userID = c.get("UserID");
+    if (!userID) {
+      return c.json({ error: "User ID not found in context" }, 401);
+    }
+
+    const existingUser = await prisma.user.findUnique({
+      where: { id: userID }
+    });
+
+    if (!existingUser) {
+      return c.json({ error: "User does not exist" }, 400);
+    }
+
     const {title, content} = validate.data;
     const post = await prisma.post.create({
       data: {
@@ -85,9 +98,9 @@ blogRounter.post('/create-blog', async (c) => {
     })
   } catch (error) {
     console.error("Error creating blog", error);
-    return c.json({
-      error: 'Error post cannot be created'
-    })
+    return c.json({ 
+      error: "Error post cannot be created" 
+    }, 500);
   }
 })
 

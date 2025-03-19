@@ -7,6 +7,7 @@ import axios from "axios";
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import Logo from "@repo/ui/logo";
+import Logout from "./logout";
 
 const handleDelete = async ({ 
     postID, 
@@ -55,7 +56,7 @@ const PublishedNavBar = ({
         <>
         <nav className="text-white flex justify-between max-w-7xl mx-auto items-center p-5">
             <Logo />
-            <div className="gap-4">
+            <div className="flex items-center gap-4">
                 <Button 
                 text="Delete" 
                 variant="delete" 
@@ -67,6 +68,7 @@ const PublishedNavBar = ({
                 variant="primary" 
                 onClick={() => router.push("/edit")}
                 />
+                <Logout />
                 <ToastContainer 
                 position="bottom-right"
                 />
