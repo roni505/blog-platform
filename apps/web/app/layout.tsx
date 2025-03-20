@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Source_Serif_4 } from "next/font/google";
 import { BlogStoreProvider } from "../stores/store-provider";
 import AppNavBar from "../ui/app-navbar";
+import { Analytics } from "@vercel/analytics/react"
 
 const sourceSerif = Source_Serif_4({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <BlogStoreProvider>
           {children}
         </BlogStoreProvider>
+        <Analytics />
       </body>
     </html>
   );
