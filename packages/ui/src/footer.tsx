@@ -21,7 +21,7 @@ const Footer = () => {
             </Link>
           </div>
         </footer>
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 max-w-[100vw] w-full h-[300px] mx-auto z-[-1] shadow-[0px_-32px_62.6px_0px_#4A4A4A] bg-black rounded-t-[90%]"></div>
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 max-w-[100vw] w-full h-[300px] mx-auto z-[-1] shadow-[0px_-12px_62.6px_0px_#4A4A4A] bg-black rounded-t-[90%]"></div>
       </div>
     </>
   );
